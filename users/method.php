@@ -43,10 +43,11 @@ if ($action == 'add') {
     } catch (\Throwable $th) {
         header('location:index.php');
     }
-    
 } elseif ($action == 'change_password') {
     $id = $_POST['id'];
     $current = $_POST['current'];
     $new = $_POST['new_pass'];
-    $db->changePassword($id,$current,$new);
+    $db->changePassword($id, $current, $new);
+} elseif ($action == 'logout') {
+    $db->logout();
 }

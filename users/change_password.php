@@ -1,5 +1,8 @@
 <?php
 include '../database.php';
+if (!isset($_SESSION['username'])) {
+    header("Location: ../index.php");
+}
 $db = new database();
 $id = $_GET['id'];
 if ($id != null) {

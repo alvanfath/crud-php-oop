@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../index.php");
+}
 include '../database.php';
 $db = new database();
 $no = 1;
@@ -21,7 +24,7 @@ $no = 1;
         }
 
         .home {
-            background: linear-gradient(130deg, #fff  45%, #4e0685 45%);
+            background: linear-gradient(130deg, #fff 45%, #4e0685 45%);
             height: 100%;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -35,7 +38,10 @@ $no = 1;
             <div class="card" style="width: 50rem; max-width: 100%">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
                     <h4>Users table</h4>
-                    <a href="create.php" class="btn btn-sm btn-primary">Create</a>
+                    <div>
+                        <a href="create.php" class="btn btn-sm btn-primary">Create</a>
+                        <a href="method.php?action=logout" class="btn btn-sm btn-secondary">Logout</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div id="alert">

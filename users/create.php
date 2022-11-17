@@ -1,12 +1,9 @@
 <?php
 include '../database.php';
-$db = new database();
-$id = $_GET['id'];
-if ($id != null) {
-    $data = $db->getData($id);
-}else {
-    header('location:index.php');
+if (!isset($_SESSION['username'])) {
+    header("Location: ../index.php");
 }
+$db = new database();
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,6 +21,7 @@ if ($id != null) {
 
         .home {
             background: linear-gradient(130deg, #fff  45%, #4e0685 45%);
+            background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
@@ -34,20 +32,23 @@ if ($id != null) {
     <div class="min-vh-100 py-5 d-flex justify-content-center align-items-center home">
         <div class="card" style="width: 50rem; max-width: 100%">
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                <h4>Edit user</h4>
+                <h4>Create user</h4>
                 <a href="index.php" class="btn btn-sm btn-secondary">Back</a>
             </div>
             <div class="card-body">
-                <form method="post" action="method.php?action=update">
-                    <input type="text" name="id" value="<?php echo $data['id']; ?>" hidden>
+                <form method="post" action="method.php?action=add">
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="name">Name :</label>
-                            <input type="text" name="name" id="name" class="form-control" value="<?php echo $data['name']; ?>">
+                            <input type="text" name="name" id="name" class="form-control">
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="email">Email :</label>
-                            <input type="email" name="email" id="email" class="form-control" value="<?php echo $data['email']; ?>">
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password">Password :</label>
+                            <input type="password" name="password" id="password" class="form-control">
                         </div>
                     </div>
                     <div class="d-flex gap-2">
